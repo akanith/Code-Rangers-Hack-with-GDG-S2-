@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Card container */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Timer styling */
+        .time {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Card header (Question number) */
+        h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* File input styling */
+        input[type="file"] {
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Submit button styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .file-name {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .start-button, .stop-button {
+            background-color: #2196F3;
+            border: none;
+            padding: 8px 20px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .start-button:hover, .stop-button:hover {
+            background-color: #1976D2;
+        }
+
+        .stop-button {
+            background-color: #F44336;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 10 Cards with timers -->
+ <div>
+    <H1>This is Grade-10 History Test</H1>
+    <br>
+    <br>
+<div class="card" id="card1">   
+    <h3>Question 1:
+        Summarise the attributes of a nation as Renan understands them. Why, in his view, are nations important?
+    </h3>
+
+    <div class="time" id="time1">15:00</div>
+    <input type="file" id="fileInput1" onchange="updateFileName(1)">
+    <div class="file-name" id="fileName1">No file selected</div>
+    <button type="button" onclick="submitForm(1)">Submit</button>
+    <button class="start-button" id="startButton1" onclick="startTimer(1)">Start</button>
+    <button class="stop-button" id="stopButton1" onclick="stopTimer(1)">Stop</button>
+</div>
+
+<div class="card" id="card2">
+    <div class="time" id="time2">15:00</div>
+    <h3>Question 2
+        What did Liberal Nationalism stand for?
+    </h3>
+    <input type="file" id="fileInput2" onchange="updateFileName(2)">
+    <div class="file-name" id="fileName2">No file selected</div>
+    <button type="button" onclick="submitForm(2)">Submit</button>
+    <button class="start-button" id="startButton2" onclick="startTimer(2)">Start</button>
+    <button class="stop-button" id="stopButton2" onclick="stopTimer(2)">Stop</button>
+</div>
+<div class="card" id="card3">
+    <div class="time" id="time2">15:00</div>
+    <h3>Question 3
+        What did Liberal Nationalism stand for?
+    </h3>
+    <input type="file" id="fileInput2" onchange="updateFileName(2)">
+    <div class="file-name" id="fileName2">No file selected</div>
+    <button type="button" onclick="submitForm(2)">Submit</button>
+    <button class="start-button" id="startButton2" onclick="startTimer(2)">Start</button>
+    <button class="stop-button" id="stopButton2" onclick="stopTimer(2)">Stop</button>
+</div>
+<div class="card" id="card4">
+    <div class="time" id="time2">15:00</div>
+    <h3>Question 4
+        Discuss the importance of language and popular traditions in the creation of national identity.
+    </h3>
+    <input type="file" id="fileInput2" onchange="updateFileName(2)">
+    <div class="file-name" id="fileName2">No file selected</div>
+    <button type="button" onclick="submitForm(2)">Submit</button>
+    <button class="start-button" id="startButton2" onclick="startTimer(2)">Start</button>
+    <button class="stop-button" id="stopButton2" onclick="stopTimer(2)">Stop</button>
+</div>
+
+<!-- Repeat for 8 more cards (3-10) -->
+
+<script>
+    // Function to update file name when a file is selected
+    function updateFileName(cardId) {
+        var fileInput = document.getElementById('fileInput' + cardId);
+        var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file selected";
+        document.getElementById('fileName' + cardId).textContent = fileName;
+    }
+
+    // Function to submit the form (just an alert for demo purposes)
+    function submitForm(cardId) {
+        var fileInput = document.getElementById('fileInput' + cardId);
+        if (fileInput.files.length === 0) {
+            alert("Please select a file before submitting.");
+        } else {
+            alert("File submitted successfully: " + fileInput.files[0].name);
+        }
+    }
+
+    // Start the timer for a specific card
+    function startTimer(cardId) {
+        var timerDisplay = document.getElementById('time' + cardId);
+        var startButton = document.getElementById('startButton' + cardId);
+        var stopButton = document.getElementById('stopButton' + cardId);
+        var timeInSeconds = 15 * 60; // 15 minutes
+
+        // Show the stop button and hide the start button
+        startButton.style.display = 'none';
+        stopButton.style.display = 'block';
+
+        // Start the timer
+        var timer = setInterval(function() {
+            var minutes = Math.floor(timeInSeconds / 60);
+            var seconds = timeInSeconds % 60;
+
+            // Format the time to always display two digits
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            // Update the timer display
+            timerDisplay.textContent = minutes + ":" + seconds;
+
+            // Decrease the time by 1 second
+            timeInSeconds--;
+
+            // If time reaches 0, stop the timer
+            if (timeInSeconds < 0) {
+                clearInterval(timer);
+                timerDisplay.textContent = "Time's up!";
+                startButton.style.display = 'none';
+                stopButton.style.display = 'none';
+            }
+        }, 1000); // Update the timer every second
+
+        // Store the timer ID so we can clear it when the stop button is clicked
+        window['timer' + cardId] = timer;
+    }
+
+    // Stop the timer for a specific card
+    function stopTimer(cardId) {
+        var stopButton = document.getElementById('stopButton' + cardId);
+        var startButton = document.getElementById('startButton' + cardId);
+        clearInterval(window['timer' + cardId]);
+        
+        // Hide the stop button and show the start button
+        stopButton.style.display = 'none';
+        startButton.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
